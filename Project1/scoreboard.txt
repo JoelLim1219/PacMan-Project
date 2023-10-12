@@ -1,0 +1,6 @@
+36 57 13
+test 44 18
+nama 42 8
+java 33 7
+joel 30 9
+gg 23 7
