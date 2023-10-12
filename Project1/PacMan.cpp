@@ -10,20 +10,8 @@
 #include <ctime>
 #include <cstring>
 #include <cctype>
+#include <vector>
 using namespace std;
-
-void main_menu();
-void run_game();
-void make_map();
-bool display(int t_p_x, int t_p_y, int p_x, int p_y, int g_x, int g_y, int score, int duration, int scale, bool finish);
-void e_display(int p_x, int p_y, int g_x, int g_y);
-void edit_map();
-void arrow_key_movement(int& x, int& y, char key);
-void edit_arrow_key_movement(int& x, int& y, char key);
-void ghost_movement(int p_x, int p_y, int& g_x, int& g_y);
-bool compare_score(SCOREBOARD a, SCOREBOARD b);
-void scoreboard(int score, int duration);
-void view_scoreboard();
 
 struct INFO_COORDS
 {
@@ -42,6 +30,19 @@ struct SCOREBOARD
 };
 
 struct SCOREBOARD player[100];
+
+void main_menu();
+void run_game();
+void make_map();
+bool display(int t_p_x, int t_p_y, int p_x, int p_y, int g_x, int g_y, int score, int duration, int scale, bool finish);
+void e_display(int p_x, int p_y, int g_x, int g_y);
+void edit_map();
+void arrow_key_movement(int& x, int& y, char key);
+void edit_arrow_key_movement(int& x, int& y, char key);
+void ghost_movement(int p_x, int p_y, int& g_x, int& g_y);
+bool compare_score(SCOREBOARD a, SCOREBOARD b);
+void scoreboard(int score, int duration);
+void view_scoreboard();
 
 int main()
 {
@@ -107,7 +108,7 @@ void run_game()
 	int playing_time, duration;
 	int scale = 0;
 	int difficulty = 2;
-	bool finish = 1;
+	bool finish;
 	
 	do
 	{
@@ -139,6 +140,7 @@ void run_game()
 
 	for (int count = 0; true; count++) // infinity loop
 	{
+		finish = 1;
 		system("cls");
 		playing_time = time(NULL);
 		duration = playing_time - start_time;
@@ -169,18 +171,18 @@ void run_game()
 		if (ghost_x == player_x && ghost_y == player_y)
 		{
 			cout << "GAME OVER!";
-			Sleep(500);
+			Sleep(1000);
 			break;
 		}
 
 		else if (finish == 1)
 		{
 			cout << "Congratz! You won! Thanks for playing!";
-			Sleep(500);
+			Sleep(1000);
 			break;
 		}
 
-		Sleep(50);
+		Sleep(100);
 	}
 
 	if (key != 27)
@@ -284,10 +286,8 @@ void e_display(int p_x, int p_y, int g_x, int g_y)
 					cout << "X";
 				else if (row == g_y && column == g_x)
 					cout << "G";
-				else if (map[row][column].is_wall == 0 && map[row][column].p_pass == 1)
+				else if (map[row][column].is_wall == 0)
 					cout << " ";
-				else if (map[row][column].is_wall == 0 && map[row][column].p_pass == 0)
-					cout << ".";
 				else if (map[row][column].is_wall == 1)
 					cout << "#";
 		}
