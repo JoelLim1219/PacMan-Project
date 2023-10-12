@@ -2,6 +2,7 @@
 // https://github.com/JoelLim1219/MyStuffs.git
 
 #include <iostream>
+#include <iomanip>
 #include <conio.h>
 #include <windows.h>
 #include <fstream>
@@ -576,15 +577,15 @@ void scoreboard(int score, int duration)
 
 	system("cls");
 
-	cout << "The more you score and the less time you take the higher you are in the board!\n" << endl;
-	cout << "===============================================================================" << endl;
+	cout << "  Leaderboard is based on your scores!Take your time to score more instead!\n" << endl;
+	cout << "=============================================================================" << endl;
 	cout << "\t\t\t\tLEADERBOARD" << endl;
-	cout << "===============================================================================\n" << endl;
+	cout << "=============================================================================\n" << endl;
 	cout << "\t\t\tNo\tName\tScore\tDuration" << endl;
 
 	for (int i = 0; i < count; i++)
 	{
-		cout << "\t\t\t" << i + 1 << "\t" << player[i].name << "\t" << player[i].score << "\t" << player[i].duration << endl;
+		cout << "\t\t\t" << i + 1 << "\t" << player[i].name << "\t" << setw(4) << player[i].score << "\t" << setw(6) << player[i].duration << endl;
 		out_file << player[i].name << " " << player[i].score << " " << player[i].duration << endl;
 	}
 
@@ -597,16 +598,16 @@ void view_scoreboard()
 	int count = 0;
 	system("cls");
 
-	cout << "The more you score and the less time you take the higher you are in the board!\n" << endl;
-	cout << "===============================================================================" << endl;
+	cout << "  Leaderboard is based on your scores!Take your time to score more instead!\n" << endl;
+	cout << "=============================================================================" << endl;
 	cout << "\t\t\t\tLEADERBOARD" << endl;
-	cout << "===============================================================================\n" << endl;
+	cout << "=============================================================================\n" << endl;
 	cout << "\t\t\tNo\tName\tScore\tDuration" << endl;
 
 	ifstream in_file("scoreboard.txt");
 
 	in_file >> player[count].name >> player[count].score >> player[count].duration;
-	cout << "\t\t\t" << (count + 1) << "\t" << player[count].name << "\t" << player[count].score << "\t" << player[count].duration << endl;
+	cout << "\t\t\t" << (count + 1) << "\t" << player[count].name << "\t" << setw(4) << player[count].score << "\t" << setw(6) << player[count].duration << endl;
 	while (in_file)
 	{
 		count++;
@@ -615,7 +616,7 @@ void view_scoreboard()
 		if (!in_file)
 			break;
 		else 
-			cout << "\t\t\t" << (count + 1) << "\t" << player[count].name << "\t" << player[count].score << "\t" << player[count].duration << endl;
+			cout << "\t\t\t" << (count + 1) << "\t" << player[count].name << "\t" << setw(4) << player[count].score << "\t" << setw(6) << player[count].duration << endl;
 	}
 
 	in_file.close();
